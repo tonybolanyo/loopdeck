@@ -16,21 +16,14 @@ Dado que el proyecto prevé usar un PC, la mejor solución es inyectar energía 
 a los LEDs o usar un Hub USB con alimentación propia, separando las líneas de energía
 pero manteniendo la tierra unida.
 
-               [ Hub USB Alimentado / Cargador 5V ]
-                             |
-             +---------------+---------------+
+```mermaid
+flowchart TD
+    H[Hub USB Alimentado / Cargador 5V] -->| 5V Externos | L1[Cadena LEDs - Línea VCC 5V]
+    H -->|GND Externa| L2[Cadena LEDs - Línea GND]
 
-             | (5V Externos)                 | (GND Externa)
-             v                               v
-       [ Cadena LEDs ]                 [ Cadena LEDs ]
-        Línea VCC (5V)                  Línea GND
-             ^                               ^
-
-             | (NO conectar a VCC            | (SÍ conectar a GND
-             |  del Arduino)                 |  del Arduino)
-             |                               |
-       [ Arduino Pro Micro ] <---------------+
-
+    L1 ---|NO conectar a VCC del Arduino| A[Arduino Pro Micro]
+    L2 <-->|SÍ conectar a GND del Arduino| A
+```
 
 ## Las 3 reglas de oro para el cableado eléctrico
 

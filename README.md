@@ -5,13 +5,33 @@ Este proyecto es una pedalera MIDI personalizada diseñada para replicar el fluj
 La pedalera está construida sobre un **Arduino Pro Micro** y cuenta con retroalimentación visual completa mediante pantallas OLED y LEDs direccionables, funcionando de manera bidireccional con Mobius.
 
 ## 🛠️ Características Principales
-p
+
 - **Control Total:** 10 switches de pie para funciones de grabación, play, overdub, mute, undo/redo, clear y tap tempo.
 - **Retroalimentación Visual (Feedback):**
     - **Pantallas OLED (2x):** Visualización del estado de las pistas y métricas (BPM) en tiempo real.
     - **LEDs WS2812B:** Indicadores de estado por color (Rojo=Rec, Verde=Play, Naranja=Overdub, Cian=Mute).
 - **Comunicación Bidireccional:** Arduino envía comandos a Mobius y recibe estados de vuelta para actualizar las luces y pantallas automáticamente.
 - **Diseño Robusto:** Optimizado para escenarios con blindaje contra interferencias y diseño ergonómico.
+
+El objetivo es controlar 4 pistas independientes de Mobius. Para ello los interruptorees de pie realizan las siguientes funciones:
+
+| Footswitch | Función en Mobius              | Comportamiento LED                      | Acción musical                                                 |
+| ---------- | ------------------------------ | --------------------------------------- | -------------------------------------------------------------- |
+|    FS1     | Track 1: Rec/Play/Overdub      | Rojo (Rec) Verde (Play) Naranja (Ovd)   | Ritmo base (percusión guitarra)                                |
+|    FS2     | Track 2: Rec/Play/Overduv      | Rojo (Rec) Verde (Play) Naranja (Ovd)   | Línea de bajo o primer bloque armónico                         |
+|    FS3     | Track 3: Rec/Play/Overduv      | Rojo (Rec) Verde (Play) Naranja (Ovd)   | Acordes principales o pad de fondo                             |
+|    FS4     | Track 4: Rec/Play/Overduv      | Rojo (Rec) Verde (Play) Naranja (Ovd)   | Armonías vocales o arreglo secundario                          |
+|    FS5     | Mute/Unmute track seleccionado | Apagado (Mute) Cian (Activo)            | Silencia instantáneamente la pista seleccionada                | 
+|    FS6     | Undo/Redo                      | Parpadeo blanco rápido                  | Borra la última capa grabada                                   |
+|    FS7     | Borra todo (Reset)             | Rojo parpadeante prolongado             | Resetea Mobius por completo                                    |
+|    FS8     | Selección de pista (ciclo 1-4) | Magenta (indica pista seleccionada)     | Permite moverse entre pistas para aplicar efectos o mutes      |
+|    FS9     | Reverse/Speed Toggle           | Azul (efecto activado)                  | Activa efectos globales (reproducir al revés o mitad velocidad |
+|    FS10    | Tap Tempo                      | Parpadea en amarillo al ritmo del reloj | Define los BMP del proyecto antes de empezar a tocar           |
+
+Para saber qué está pasando sin tener que mirar al portátil las dos pantallas muestran información básica:
+
+- **Pantalla 1:** Estado de pistas. Mostrará una cuadrícula con el estado de las 4 pistas simultáneamente. Por ejemplo: T1:PLAY T2:REC / T3:EMPTY T4:MUTE. 
+- **Pantalla 2:** Métricas. Mostrará el nombre de la canción/preset seleccionado en la parte superior, y el BPM gigante en el centro junto con un contador de compases (1/4, 2/4, etc.) sincronizado con el script de Mobius.
 
 ## 📋 Lista de materiales (BOM)
 

@@ -1,0 +1,30 @@
+!name Retroalimentación 4 pistas
+!autoload
+
+:loop
+  # Recorre las pistas 1 a 4
+  for track 1 4
+    # Calcula el número de CC: 51 para pista 1, 52 para pista 2, etc.
+    set ccNum 50 + track
+
+    Target track track
+
+    if status == record
+      midi out control 1 ccNum 1
+    endif
+
+    if status == play
+      midi out control 1 ccNum 2
+    endif
+
+    if status == overdub
+      midi out control 1 ccNum 3
+    endif
+
+    if status == reset
+      midi out control 1 ccNum 0
+    endif
+  next
+
+  Wait msec 50
+  goto loop
